@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather Forecast App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body{
+            background:#d7e3fc;
+            color:#333;
+        }
+
+        header{
+            background:#023e8a;
+            color:white;
+            padding:16px;
+            text-align:center;
+            font-size:24px;
+            letter-spacing:1px;
+        }
+
+        .banner{
+            background:url("https://images.unsplash.com/photo-1501973801540-537f08ccae7b")
+            no-repeat center/cover;
+            height:240px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            color:white;
+            font-size:32px;
+            font-weight:600;
+            text-shadow:0 2px 6px rgba(0,0,0,0.7);
+        }
+
+        .container{
+            max-width:420px;
+            background:white;
+            padding:25px;
+            margin:-60px auto 40px;
+            border-radius:10px;
+            box-shadow:0 4px 15px rgba(0,0,0,0.2);
+            text-align:center;
+        }
+
+        input{
+            width:70%;
+            padding:10px;
+            border-radius:6px;
+            border:1px solid #999;
+            outline:none;
+        }
+
+        button{
+            padding:10px 16px;
+            border:none;
+            background:#0077b6;
+            color:white;
+            border-radius:6px;
+            cursor:pointer;
+            margin-left:5px;
+        }
+
+        button:hover{
+            background:#0096c7;
+        }
+
+        .result{
+            margin-top:20px;
+            font-size:17px;
+            line-height:1.6;
+        }
+
+        footer{
+            background:#023e8a;
+            padding:12px;
+            text-align:center;
+            color:white;
+            font-size:14px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    Weather Forecast Web Application
+</header>
+
+<section class="banner">
+    Know Your Weather, Anytime!
+</section>
+
+<div class="container">
+    <h2>Search Weather</h2>
+    <br>
+    <input type="text" id="city" placeholder="Enter city name">
+    <button onclick="getWeather()">Search</button>
+
+    <div class="result" id="result"></div>
+</div>
+
+<footer>
+    Designed by Vansh Gautam | B.Tech CSE
+</footer>
+
+<script>
+    /*
+      This project demonstrates real-time data handling.
+      Future Scope: AI/ML-based weather prediction using historical data.
+    */
+
+    async function getWeather() {
+        let city = document.getElementById("city").value;
+
+        if(city.trim() === ""){
+            document.getElementById("result").innerHTML =
+                "<p style='color:red;'>⚠ Please enter a city name</p>";
+            return;
+        }
+
+        const apiKey = "YOUR_API_KEY_HERE"; // OpenWeatherMap API key
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+
+            if(data.cod !== 200){
+                document.getElementById("result").innerHTML =
+                    "<p style='color:red;'>City not found!</p>";
+                return;
+            }
+
+            document.getElementById("result").innerHTML = `
+                <h3>${data.name}</h3>
+                <p>🌡 Temperature: <b>${data.main.temp} °C</b></p>
+                <p>☁ Weather: <b>${data.weather[0].description}</b></p>
+                <p>💧 Humidity: <b>${data.main.humidity}%</b></p>
+                <p>🌬 Wind Speed: <b>${data.wind.speed} m/s</b></p>
+            `;
+        }
+        catch(error){
+            document.getElementById("result").innerHTML =
+                "<p style='color:red;'>Error fetching weather data</p>";
+        }
+    }
+</script>
+
+</body>
+</html>
