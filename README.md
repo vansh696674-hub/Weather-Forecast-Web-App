@@ -1,21 +1,24 @@
 # Weather Forecast Web Application
 
-This is a responsive weather forecast web application that provides real-time
-weather information such as temperature, humidity, wind speed, and conditions
-using a weather API.
+This is a simple weather forecast web application developed as a mini project.
+The application demonstrates front-end development concepts using HTML, CSS,
+and JavaScript.
 
 ## Features
-- Search weather by city name
-- Real-time weather data
-- Clean and responsive UI
-- API-based data fetching
+- City-based weather search
+- Displays temperature, humidity, wind speed, and AQI
+- Responsive user interface
+- JavaScript-based logic with simulated weather data
 
 ## Technologies Used
 - HTML5
 - CSS3
 - JavaScript
-- OpenWeatherMap API
+
+## Note
+This project uses simulated (dummy) weather data for learning and demonstration
+purposes. It does not fetch real-time data from external APIs.
 
 ## Future Scope
+- Integration with real weather APIs
 - AI/ML-based weather prediction using historical data
-- Weather-based recommendation system
