@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather Forecast App</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family: Poppins, sans-serif;
+        }
+
+        body{
+            background: #d7e3fc;
+            color:#333;
+        }
+
+        header{
+            background:#023e8a;
+            color:white;
+            padding:15px 0;
+            text-align:center;
+            font-size:24px;
+            letter-spacing:1px;
+        }
+
+        .banner{
+            background:url("https://images.unsplash.com/photo-1501973801540-537f08ccae7b") no-repeat center/cover;
+            height:260px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            color:white;
+            text-shadow:0 2px 5px rgba(0,0,0,0.7);
+            font-size:36px;
+            font-weight:600;
+        }
+
+        .container{
+            max-width:500px;
+            background:white;
+            padding:25px;
+            margin: -70px auto 50px auto;
+            border-radius:10px;
+            box-shadow:0 4px 15px rgba(0,0,0,0.2);
+            text-align:center;
+        }
+
+        input{
+            width:70%;
+            padding:12px;
+            border-radius:8px;
+            border:1px solid #999;
+            outline:none;
+        }
+
+        button{
+            padding:12px 18px;
+            border:none;
+            background:#0077b6;
+            color:white;
+            border-radius:8px;
+            cursor:pointer;
+            margin-left:5px;
+        }
+
+        .result{
+            margin-top:20px;
+            font-size:18px;
+        }
+
+        footer{
+            background:#023e8a;
+            padding:12px;
+            text-align:center;
+            color:white;
+            font-size:14px;
+        }
+    </style>
+</head>
+
+<body>
+<header>
+    Weather Forecast Web Application
+</header>
+
+<section class="banner">
+    Know Your Weather, Anytime!
+</section>
+
+<div class="container">
+    <h2>Search for Weather</h2>
+    <div class="search">
+        <input type="text" id="city" placeholder="Enter city name">
+        <button onclick="showWeather()">Search</button>
+    </div>
+
+    <div class="result" id="result"></div>
+</div>
+
+<footer>
+    Designed By: Vansh Gautam | B.Tech CSE
+</footer>
+
+<script>
+function showWeather() {
+    let city = document.getElementById("city").value;
+
+    if(city.trim() === ""){
+        document.getElementById("result").innerHTML = "<p style='color:red;'>⚠ Enter a city name!</p>";
+        return;
+    }
+
+    // Generate Random Values
+    let temp = (Math.random() * (45 - 10) + 10).toFixed(1);
+    let humidity = Math.floor(Math.random() * 100);
+    let wind = (Math.random() * 10).toFixed(1);
+
+    let conditions = ["Clear Sky", "Cloudy", "Rainy", "Thunderstorm", "Haze", "Snowfall", "Fog"];
+    let condition = conditions[Math.floor(Math.random() * conditions.length)];
+
+    // Random AQI
+    let aqi = Math.floor(Math.random() * 400) + 1;
+
+    // Determine AQI Quality Text
+    let aqiText = "";
+    if(aqi <= 50) aqiText = "Good 😊";
+    else if(aqi <= 100) aqiText = "Moderate 🙂";
+    else if(aqi <= 200) aqiText = "Unhealthy 😷";
+    else if(aqi <= 300) aqiText = "Very Unhealthy 😖";
+    else aqiText = "Hazardous ☠️";
+
+    // Display Output
+    document.getElementById("result").innerHTML = `
+        <h3>${city.toUpperCase()}</h3>
+        <p>🌡 Temperature: <b>${temp}°C</b></p>
+        <p>☁ Weather: <b>${condition}</b></p>
+        <p>💧 Humidity: <b>${humidity}%</b></p>
+        <p>🌬 Wind Speed: <b>${wind} m/s</b></p>
+        <p>🌫 Air Quality Index (AQI): <b>${aqi}</b> → <b>${aqiText}</b></p>
+    `;
+}
+</script>
+
+</body>
+</html>
